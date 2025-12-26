@@ -1,4 +1,6 @@
 defmodule Day1 do
+  @behaviour AOC.Day
+
   def solve_1(input) do
     String.split(input)
     |> Enum.map(fn
@@ -38,10 +40,3 @@ defmodule Day1 do
     |> elem(1)
   end
 end
-
-{_, argv, _} = OptionParser.parse(System.argv(), switches: [])
-filename = hd(argv)
-input = File.read!(filename)
-
-IO.inspect(Day1.solve_1(input))
-IO.inspect(Day1.solve_2(input))
