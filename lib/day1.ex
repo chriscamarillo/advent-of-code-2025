@@ -1,5 +1,5 @@
 defmodule Day1 do
-  @behaviour AOC.Day
+  @behaviour AOC.Solver
 
   def solve_1(input) do
     String.split(input)
