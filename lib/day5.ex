@@ -15,6 +15,7 @@ defmodule Day5 do
       case acc do
         [] ->
           [right]
+
         [left | rest] ->
           {l_start, l_stop} = left
           {r_start, r_stop} = right
@@ -26,28 +27,31 @@ defmodule Day5 do
           end
       end
     end)
-    |> Enum.reverse
+    |> Enum.reverse()
     |> Enum.map(fn {start, stop} -> stop - start + 1 end)
-    |> Enum.sum
-
+    |> Enum.sum()
   end
 
   defp parse_input(input) do
     [ranges, ingredients] = input |> String.split("\n\n")
 
-    ingredients = ingredients
-    |> String.split
-    |> Enum.map(&String.to_integer/1)
+    ingredients =
+      ingredients
+      |> String.split()
+      |> Enum.map(&String.to_integer/1)
 
-    ranges = ranges
-    |> String.split
-    |> Enum.map(&(String.split(&1, "-")))
-    |> Enum.map(fn [a, b] -> {String.to_integer(a), String.to_integer(b)} end)
+    ranges =
+      ranges
+      |> String.split()
+      |> Enum.map(&String.split(&1, "-"))
+      |> Enum.map(fn [a, b] -> {String.to_integer(a), String.to_integer(b)} end)
 
     {ingredients, ranges}
   end
 
   defp is_fresh(ingredient, ranges) do
-    ranges |> Stream.filter(fn {start, stop} -> ingredient >= start and ingredient <= stop end) |> Enum.any?
+    ranges
+    |> Stream.filter(fn {start, stop} -> ingredient >= start and ingredient <= stop end)
+    |> Enum.any?()
   end
 end

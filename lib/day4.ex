@@ -11,16 +11,17 @@ defmodule Day4 do
 
   defp solve(input, allow_removal \\ false) do
     input
-      |> parse_grid
-      |> get_all_toilet_paper_locations
-      |> access_rolls(allow_removal)
-      |> MapSet.size
+    |> parse_grid
+    |> get_all_toilet_paper_locations
+    |> access_rolls(allow_removal)
+    |> MapSet.size()
   end
 
   defp access_rolls(locations, allow_removal) do
-    rolls = locations
+    rolls =
+      locations
       |> Enum.filter(&(get_neighbor_count(&1, locations) < 4))
-      |> MapSet.new
+      |> MapSet.new()
 
     if MapSet.size(rolls) > 0 and allow_removal do
       locations = MapSet.difference(locations, rolls)
@@ -32,11 +33,11 @@ defmodule Day4 do
 
   defp parse_grid(input) do
     input
-    |> String.split
-    |> Enum.with_index
+    |> String.split()
+    |> Enum.with_index()
     |> Enum.flat_map(fn {row, row_n} ->
       String.codepoints(row)
-      |> Enum.with_index
+      |> Enum.with_index()
       |> Enum.map(fn {item, col_n} ->
         {item, row_n, col_n}
       end)
@@ -47,7 +48,7 @@ defmodule Day4 do
     grid
     |> Stream.filter(fn {item, _, _} -> item == "@" end)
     |> Enum.map(fn {_, row, col} -> {row, col} end)
-    |> MapSet.new
+    |> MapSet.new()
   end
 
   defp get_neighbor_count({row, col}, toilet_paper_locations) do
@@ -59,10 +60,10 @@ defmodule Day4 do
       {row - 1, col + 1},
       {row + 1, col},
       {row + 1, col - 1},
-      {row + 1, col + 1},
+      {row + 1, col + 1}
     ]
-    |> MapSet.new
+    |> MapSet.new()
     |> MapSet.intersection(toilet_paper_locations)
-    |> MapSet.size
+    |> MapSet.size()
   end
 end
