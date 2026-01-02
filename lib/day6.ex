@@ -54,7 +54,6 @@ defmodule Day6 do
         end
 
       chunk
-      # |> Enum.take_while(fn e -> List.last(e) not in ["+", "*"] end)
       |> Enum.map(fn digits ->
         digits |> Enum.filter(fn e -> e not in ["+", "*"] end) |> Enum.join() |> String.trim()
       end)
